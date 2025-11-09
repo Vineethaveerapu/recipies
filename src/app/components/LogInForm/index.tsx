@@ -1,49 +1,70 @@
 "use client";
+import { FormEvent, useState } from "react";
 import { userArray } from "@/data/user";
-import { useState } from "react";
 import { useUserContext } from "@/utils/contexts";
 import { UserContextType } from "@/utils/types";
 
 const LogInForm = () => {
   const [userInput, setUserInput] = useState<string>("");
-  const [userNotFound, setUserNotFound] = useState<boolean>(true);
-  const { user, setUser } = useUserContext() as UserContextType;
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { login, isReady } = useUserContext() as UserContextType;
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    const loggedInUser = userArray.filter((user) => user.name === userInput);
-    if (!loggedInUser[0]) {
-      setUserNotFound(false);
-    } else {
-      setUserNotFound(true);
-      setUser(loggedInUser[0]);
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const cleanedInput = userInput.trim().toLowerCase();
+
+    if (!cleanedInput) {
+      setErrorMessage("Please enter a username to continue.");
+      return;
     }
-  };
 
-  const handleChange = (e: { target: { value: string } }) => {
-    setUserInput(e.target.value);
+    const foundUser = userArray.find(
+      (item) => item.name.toLowerCase() === cleanedInput
+    );
+
+    if (!foundUser) {
+      setErrorMessage(
+        "We could not find that user. Try Vini, John or Lisa to explore the app."
+      );
+      return;
+    }
+
+    login(foundUser);
+    setErrorMessage(null);
+    setUserInput("");
   };
 
   return (
     <section className="flex min-h-[60vh] items-center justify-center px-4 py-12">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm space-y-6 rounded-2xl border border-slate-200 bg-white/80 p-8 shadow-lg backdrop-blur-md transition-shadow duration-200 hover:shadow-xl dark:border-slate-700 dark:bg-slate-900/70"
+        className="w-full max-w-sm space-y-6 rounded-3xl border border-white/70 bg-white/90 p-8 shadow-xl ring-1 ring-rose-100/60 backdrop-blur-lg transition-shadow duration-200 hover:shadow-2xl dark:border-slate-800 dark:bg-slate-900/80 dark:ring-red-700/20"
       >
+        <header className="space-y-1 text-center">
+          <p className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+            Welcome back
+          </p>
+          <p className="text-sm text-slate-600 dark:text-slate-300">
+            Log in to see your personal recipes and favourites.
+          </p>
+        </header>
         <div className="space-y-2">
           <label
             className="block text-sm font-semibold text-slate-700 dark:text-slate-200"
             htmlFor="username"
           >
-            Enter your Username
+            Username
           </label>
           <input
-            onChange={handleChange}
+            onChange={(event) => setUserInput(event.target.value)}
             value={userInput}
             id="username"
             type="text"
-            placeholder="Username"
-            className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-slate-400 focus:ring-2 focus:ring-slate-400/40 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-slate-500 dark:focus:ring-slate-500/30"
+            placeholder="Try Vini, John or Lisa"
+            className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-red-600 focus:ring-2 focus:ring-red-600/30 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-red-600 dark:focus:ring-red-700/30"
+            autoComplete="username"
+            disabled={!isReady}
           />
         </div>
         <div className="space-y-2">
@@ -51,24 +72,27 @@ const LogInForm = () => {
             className="block text-sm font-semibold text-slate-700 dark:text-slate-200"
             htmlFor="password"
           >
-            Enter your Password
+            Password
           </label>
           <input
             id="password"
             type="password"
-            placeholder="Password"
-            className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-slate-400 focus:ring-2 focus:ring-slate-400/40 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-slate-500 dark:focus:ring-slate-500/30"
+            placeholder="Any password works in this demo"
+            className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-900 outline-none transition-colors focus:border-red-600 focus:ring-2 focus:ring-red-600/30 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-red-600 dark:focus:ring-red-700/30"
+            autoComplete="current-password"
+            disabled={!isReady}
           />
         </div>
         <button
           type="submit"
-          className="w-full rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-300"
+          className="w-full rounded-lg bg-red-700 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-white dark:bg-red-700 dark:text-white dark:hover:bg-red-600 dark:focus:ring-red-500 dark:focus:ring-offset-slate-900 disabled:cursor-not-allowed disabled:opacity-70"
+          disabled={!isReady}
         >
           Log In
         </button>
-        {!userNotFound && (
-          <p className="rounded-lg border border-red-100 bg-red-50 px-3 py-2 text-sm font-medium text-red-600 dark:border-red-900 dark:bg-red-950/60 dark:text-red-300">
-            User not found
+        {errorMessage && (
+          <p className="rounded-lg border border-red-200/80 bg-red-50/80 px-3 py-2 text-sm font-medium text-red-700 dark:border-red-900 dark:bg-red-950/60 dark:text-red-300">
+            {errorMessage}
           </p>
         )}
       </form>

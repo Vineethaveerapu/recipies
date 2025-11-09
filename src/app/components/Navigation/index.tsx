@@ -8,28 +8,28 @@ export default function Navigation() {
   const pathname = usePathname();
 
   return (
-    <>
-      <nav className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between p-6 bg-gray-200 shadow-lg">
-        <ul className="flex flex-wrap items-center gap-4 lg:gap-10">
-          {navItems.map((item) => {
-            return (
-              <li key={item.link}>
-                <Link
-                  href={item.link}
-                  className={`relative inline-block text-black font-medium text-lg tracking-wide transition-colors duration-200 hover:text-red-500 focus:text-red-500
-    after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-0.5 after:bg-red-500
-    after:transition-all after:duration-400 after:ease-out
-    hover:after:w-full
-    focus:after:w-full
-    ${pathname === item.link ? "after:w-full" : ""}`}
-                >
-                  {item.name}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </>
+    <nav className="mt-4 w-full rounded-2xl border border-slate-200 bg-white/90 px-4 py-3 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/80">
+      <ul className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+        {navItems.map((item) => {
+          const isActive = pathname === item.link;
+
+          return (
+            <li key={item.link}>
+              <Link
+                href={item.link}
+                className={`relative inline-flex items-center justify-center rounded-full px-4 py-2 text-xs font-semibold transition focus:outline-none focus:ring-2 focus:ring-red-700/50 sm:px-5 sm:text-sm ${
+                  isActive
+                    ? "bg-red-700 text-white shadow-md shadow-red-700/20"
+                    : "text-slate-700 hover:bg-red-50/80 hover:text-red-700 dark:text-slate-200 dark:hover:bg-red-700/10 dark:hover:text-red-300"
+                }`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {item.name}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
 }

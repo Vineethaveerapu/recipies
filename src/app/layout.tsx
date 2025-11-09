@@ -4,7 +4,6 @@ import "./globals.css";
 import { UserContextProvider } from "@/utils/contexts";
 import LogInWrapper from "./components/LogInWrapper";
 import Header from "./components/Header";
-import Navigation from "./components/Navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,16 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-slate-50 dark:bg-slate-950">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-50 dark:bg-slate-950`}
       >
         <UserContextProvider>
           <Header />
-          <LogInWrapper>
-            {children}
-            <Navigation />
-          </LogInWrapper>
+          <LogInWrapper>{children}</LogInWrapper>
         </UserContextProvider>
       </body>
     </html>
