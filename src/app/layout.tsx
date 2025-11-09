@@ -4,6 +4,7 @@ import "./globals.css";
 import { UserContextProvider } from "@/utils/contexts";
 import LogInWrapper from "./components/LogInWrapper";
 import Header from "./components/Header";
+import Navigation from "./components/Navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +33,10 @@ export default function RootLayout({
       >
         <UserContextProvider>
           <Header />
-          <LogInWrapper>{children}</LogInWrapper>
+          <LogInWrapper>
+            {children}
+            <Navigation />
+          </LogInWrapper>
         </UserContextProvider>
       </body>
     </html>
