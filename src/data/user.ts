@@ -1,19 +1,19 @@
-import { User } from "@/utils/types";
+import { UserType } from "@/utils/types";
 
-export const userArray: User[] = [
+export const userArray: UserType[] = [
   {
     name: "vini",
     favouriteCategories: ["Chicken"],
-    favouriteRecipes: [],
+    favouriteRecipes: []
   },
   {
     name: "John",
     favouriteCategories: ["Chicken"],
-    favouriteRecipes: [],
+    favouriteRecipes: []
   },
   {
     name: "John",
     favouriteCategories: ["Chicken"],
-    favouriteRecipes: [],
-  },
+    favouriteRecipes: []
+  }
 ];
