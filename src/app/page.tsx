@@ -4,19 +4,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "@/utils/contexts";
-import { UserContextType } from "@/utils/types";
-
-type MealSummary = {
-  idMeal: string;
-  strMeal: string;
-  strMealThumb: string;
-};
-
-type MealDetail = MealSummary & {
-  strCategory: string;
-  strArea: string;
-  strInstructions: string;
-};
+import { MealDetail, MealSummary, UserContextType } from "@/utils/types";
 
 const API_ENDPOINT = "https://www.themealdb.com/api/json/v1/1/";
 
@@ -202,7 +190,7 @@ export default function Home() {
               Saved items
             </h2>
             <p className="text-sm text-slate-500 dark:text-slate-300">
-              We keep your favourites handy so you can cook them again.
+              We keep your favourites so you can cook them again.
             </p>
           </div>
           <button

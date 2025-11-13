@@ -27,3 +27,22 @@ export interface NavItemType {
   name: string;
   link: string;
 }
+
+export interface Category {
+  idCategory: string;
+  strCategory: string;
+  strCategoryThumb: string;
+  strCategoryDescription: string;
+}
+
+export interface MealSummary {
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+}
+
+export interface MealDetail extends MealSummary {
+  strCategory: string;
+  strArea: string;
+  strInstructions: string;
+}

@@ -4,14 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "@/utils/contexts";
-import { UserContextType } from "@/utils/types";
-
-type Category = {
-  idCategory: string;
-  strCategory: string;
-  strCategoryThumb: string;
-  strCategoryDescription: string;
-};
+import { Category, UserContextType } from "@/utils/types";
 
 const API_ENDPOINT = "https://www.themealdb.com/api/json/v1/1/categories.php";
 
