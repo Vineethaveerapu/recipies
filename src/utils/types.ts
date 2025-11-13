@@ -46,3 +46,14 @@ export interface MealDetail extends MealSummary {
   strArea: string;
   strInstructions: string;
 }
+
+export interface StoredState {
+  user: UserType;
+  favouriteCategory: string | null;
+  savedItems: SavedItemType[];
+}
+
+export interface StoredUserState {
+  favouriteCategory: string | null;
+  savedItems: SavedItemType[];
+}

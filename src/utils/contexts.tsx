@@ -1,19 +1,14 @@
 "use client";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { SavedItemType, UserContextType, UserType } from "./types";
+import {
+  SavedItemType,
+  StoredState,
+  StoredUserState,
+  UserContextType,
+  UserType
+} from "./types";
 
 const STORAGE_KEY = "recipes-app-state";
-
-type StoredState = {
-  user: UserType;
-  favouriteCategory: string | null;
-  savedItems: SavedItemType[];
-};
-
-type StoredUserState = {
-  favouriteCategory: string | null;
-  savedItems: SavedItemType[];
-};
 
 const getUserStorageKey = (userId: string) => `${STORAGE_KEY}-${userId}`;
 
