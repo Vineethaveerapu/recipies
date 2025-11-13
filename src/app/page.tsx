@@ -84,14 +84,16 @@ export default function Home() {
         {featuredRecipe && (
           <div className="mt-4 flex flex-col items-stretch gap-3 rounded-xl bg-white/10 p-3 backdrop-blur-sm sm:flex-row sm:gap-4 sm:rounded-2xl sm:p-4">
             <div className="relative h-32 w-full flex-shrink-0 overflow-hidden rounded-lg border border-white/40 sm:h-auto sm:w-[25%] sm:rounded-xl">
-              <Image
-                src={featuredRecipe.strMealThumb}
-                alt={featuredRecipe.strMeal}
-                fill
-                sizes="(max-width: 640px) 30vw, 25vw"
-                className="object-cover"
-                priority
-              />
+              {featuredRecipe.strMealThumb && (
+                <Image
+                  src={featuredRecipe.strMealThumb}
+                  alt={featuredRecipe.strMeal}
+                  fill
+                  sizes="(max-width: 640px) 30vw, 25vw"
+                  className="object-cover"
+                  priority
+                />
+              )}
             </div>
             <div className="flex min-w-0 flex-1 flex-col space-y-1.5 sm:space-y-2">
               <p className="text-[10px] uppercase tracking-wider text-white/70 sm:text-xs">
@@ -154,13 +156,15 @@ export default function Home() {
                 onClick={() => viewItem(meal.idMeal)}
               >
                 <div className="relative aspect-video overflow-hidden bg-slate-100">
-                  <Image
-                    src={meal.strMealThumb}
-                    alt={meal.strMeal}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                  />
+                  {meal.strMealThumb && (
+                    <Image
+                      src={meal.strMealThumb}
+                      alt={meal.strMeal}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
+                  )}
                 </div>
                 <div className="flex flex-1 flex-col gap-2 p-6">
                   <p className="text-lg font-semibold text-slate-900 dark:text-white">
@@ -209,13 +213,15 @@ export default function Home() {
                 className="flex flex-col gap-4 rounded-3xl border border-slate-100 bg-white p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-xl sm:flex-row sm:items-center sm:p-6 dark:border-slate-800 dark:bg-slate-900"
               >
                 <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl sm:h-20 sm:w-20 sm:rounded-2xl">
-                  <Image
-                    src={item.thumbnail}
-                    alt={item.name}
-                    fill
-                    sizes="64px"
-                    className="object-cover"
-                  />
+                  {item.thumbnail && (
+                    <Image
+                      src={item.thumbnail}
+                      alt={item.name}
+                      fill
+                      sizes="64px"
+                      className="object-cover"
+                    />
+                  )}
                 </div>
                 <div className="flex flex-1 flex-col gap-2">
                   <p className="text-base font-semibold text-slate-900 dark:text-white">

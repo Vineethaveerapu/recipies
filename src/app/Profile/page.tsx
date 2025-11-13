@@ -75,13 +75,15 @@ const ProfilePage = () => {
                 className="flex flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900"
               >
                 <div className="relative aspect-video overflow-hidden bg-slate-100">
-                  <Image
-                    src={item.thumbnail}
-                    alt={item.name}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover"
-                  />
+                  {item.thumbnail && (
+                    <Image
+                      src={item.thumbnail}
+                      alt={item.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover"
+                    />
+                  )}
                 </div>
                 <div className="flex flex-1 flex-col gap-3 p-6">
                   <div>

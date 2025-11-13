@@ -117,13 +117,15 @@ const CategoryDetailPage = () => {
               className="group flex cursor-pointer flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900"
             >
               <div className="relative aspect-video overflow-hidden bg-slate-100">
-                <Image
-                  src={meal.strMealThumb}
-                  alt={meal.strMeal}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition duration-500 group-hover:scale-105"
-                />
+                {meal.strMealThumb && (
+                  <Image
+                    src={meal.strMealThumb}
+                    alt={meal.strMeal}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                  />
+                )}
               </div>
               <div className="flex flex-1 flex-col gap-2 p-6">
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-white">

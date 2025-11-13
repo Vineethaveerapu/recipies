@@ -152,14 +152,16 @@ const ItemPage = () => {
             <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr),minmax(0,1fr)]">
               <div className="space-y-6">
                 <div className="relative aspect-video overflow-hidden rounded-3xl border border-slate-100 shadow-xl dark:border-slate-800 lg:aspect-[4/3]">
-                  <Image
-                    src={meal.strMealThumb}
-                    alt={meal.strMeal}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 66vw"
-                    className="object-cover"
-                    priority
-                  />
+                  {meal.strMealThumb && (
+                    <Image
+                      src={meal.strMealThumb}
+                      alt={meal.strMeal}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 66vw"
+                      className="object-cover"
+                      priority
+                    />
+                  )}
                 </div>
                 <section className="space-y-3 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-100 dark:bg-slate-900 dark:ring-slate-800">
                   <h2 className="text-xl font-semibold text-slate-900 dark:text-white">
